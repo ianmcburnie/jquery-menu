@@ -1,0 +1,56 @@
+{
+  "name": "jquery-menu",
+  "description": "jQuery plugin that creates the basic interactivity for an ARIA menu widget.",
+  "version": "0.0.1",
+  "scripts": {
+    "prepublish": "npm run clean && npm run lint && npm run build",
+    "lint": "eslint jquery.menu.js > lint.txt",
+    "fix": "eslint jquery.menu.js --fix",
+    "minify": "jsmin -o jquery.menu.min.js jquery.menu.js",
+    "build": "npm run minify",
+    "clean": "rimraf *.min.js lint.txt"
+  },
+  "pre-commit": [
+    "clean",
+    "lint",
+    "build"
+  ],
+  "author": "Ian McBurnie <ianmcburnie@hotmail.com>",
+  "homepage": "https://github.com/ianmcburnie/jquery-menu",
+  "bugs": {
+    "url": "https://github.com/ianmcburnie/jquery-menu/issues"
+  },
+  "keywords": [
+    "jquery-plugin",
+    "ecosystem:jquery",
+    "accessibility",
+    "a11y",
+    "wai-aria"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ianmcburnie/jquery-menu.git"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^2.4.0",
+    "eslint-config-google": "^0.4.0",
+    "jquery": "^2.2.3",
+    "jquery-button-flyout": "^0.5.5",
+    "jquery-common-keydown": "0.0.4",
+    "jquery-next-id": "0.0.16",
+    "jquery-prevent-document-scroll-keys": "^0.3.1",
+    "jquery-roving-tabindex": "^0.7.1",
+    "jsmin": "^1.0.1",
+    "pre-commit": "^1.1.2",
+    "rimraf": "^2.4.4"
+  },
+  "peerDependencies": {
+    "jquery": ">=1.11 < 3",
+    "jquery-button-flyout": "^0.5.5",
+    "jquery-common-keydown": "0.0.4",
+    "jquery-next-id": "0.0.16",
+    "jquery-prevent-document-scroll-keys": "^0.3.1",
+    "jquery-roving-tabindex": "^0.7.1"
+  }
+}
