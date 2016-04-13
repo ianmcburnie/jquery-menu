@@ -25,8 +25,7 @@
             display: block;
         }
         .menu button:after {
-            content: ' \e61c';
-            font-family: 'vq-icon-font';
+            content: ' \2195';
         }
         .menu [role=menu] hr {
             border: 0;
@@ -82,10 +81,31 @@
             <h1>Demo: jquery-menu</h1>
 
             <div class="menu">
-                <button>Open Menu</button>
+                <button>Flat Menu</button>
                 <div role="menu">
                     <div role="menuitem">Grid</div>
                     <div role="menuitem">List</div>
+                </div>
+            </div>
+
+            <div class="menu">
+                <button>Grouped Menu</button>
+                <div role="menu">
+                    <div role="presentation">
+                        <div role="menuitem">Grid</div>
+                        <div role="menuitem">List </div>
+                    </div>
+                    <hr />
+                    <div role="presentation">
+                        <div role="menuitemradio" aria-checked="true">Name</div>
+                        <div role="menuitemradio" aria-checked="false">Date</div>
+                        <div role="menuitemradio" aria-checked="false">Price</div>
+                    </div>
+                    <hr />
+                    <div role="presentation">
+                        <div role="menuitemcheckbox" aria-checked="true">Buy it Now</div>
+                        <div role="menuitemcheckbox" aria-checked="true">Auction</div>
+                    </div>
                 </div>
             </div>
         </div>
