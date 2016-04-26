@@ -23,7 +23,7 @@ Then execute the plugin:
 $('.menu').menu();
 ```
 
-The input structure is modified:
+The input structure is then modified like so:
 
 ```html
 <!-- simple flat menu -->
@@ -36,4 +36,30 @@ The input structure is modified:
 </div>
 ```
 
-Menu can be navigated with cursor keys or mouse.
+the menu can now be navigated with cursor keys or mouse.
+
+Grouped menu structures are also supported:
+
+```html
+<!-- grouped menu -->
+<div class="menu">
+    <button>Grouped Menu</button>
+    <div role="menu">
+        <div role="presentation">
+            <div role="menuitem">Grid</div>
+            <div role="menuitem">List </div>
+        </div>
+        <hr />
+        <div role="presentation">
+            <div role="menuitemradio" aria-checked="true">Name</div>
+            <div role="menuitemradio" aria-checked="false">Date</div>
+            <div role="menuitemradio" aria-checked="false">Price</div>
+        </div>
+        <hr />
+        <div role="presentation">
+            <div role="menuitemcheckbox" aria-checked="true">Buy it Now</div>
+            <div role="menuitemcheckbox" aria-checked="true">Auction</div>
+        </div>
+    </div>
+</div>
+```

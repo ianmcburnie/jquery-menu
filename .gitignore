@@ -23,3 +23,5 @@ lint.txt
 jsdoc
 
 build
+
+.cache

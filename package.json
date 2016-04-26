@@ -7,8 +7,9 @@
     "lint": "eslint jquery.menu.js > lint.txt",
     "fix": "eslint jquery.menu.js --fix",
     "minify": "jsmin -o jquery.menu.min.js jquery.menu.js",
-    "build": "npm run minify",
-    "clean": "rimraf *.min.js lint.txt"
+    "build": "npm run clean && npm run lasso && npm run minify",
+    "clean": "rimraf *.min.js lint.txt",
+    "lasso": "lasso browser.json --output-dir ./ --minify"
   },
   "pre-commit": [
     "clean",
