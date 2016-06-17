@@ -4,18 +4,14 @@
   "version": "0.0.1",
   "scripts": {
     "prepublish": "npm run clean && npm run lint && npm run build",
-    "lint": "eslint jquery.menu.js > lint.txt",
-    "fix": "eslint jquery.menu.js --fix",
-    "minify": "jsmin -o jquery.menu.min.js jquery.menu.js",
     "build": "npm run clean && npm run lasso && npm run minify",
     "clean": "rimraf *.min.js lint.txt",
-    "lasso": "lasso browser.json --output-dir ./ --minify"
+    "fix": "eslint jquery.menu.js --fix",
+    "lasso": "lasso browser.json --output-dir ./ --minify",
+    "lint": "eslint jquery.menu.js > lint.txt",
+    "minify": "jsmin -o jquery.menu.min.js jquery.menu.js"
   },
-  "pre-commit": [
-    "clean",
-    "lint",
-    "build"
-  ],
+  "pre-commit": "prepublish",
   "author": "Ian McBurnie <ianmcburnie@hotmail.com>",
   "homepage": "https://github.com/ianmcburnie/jquery-menu",
   "bugs": {
@@ -34,24 +30,25 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^2.4.0",
+    "eslint": "^2.12.0",
     "eslint-config-google": "^0.4.0",
-    "jquery": "^2.2.3",
-    "jquery-button-flyout": "^0.5.5",
-    "jquery-common-keydown": "0.0.4",
-    "jquery-next-id": "0.0.16",
-    "jquery-prevent-document-scroll-keys": "^0.3.1",
-    "jquery-roving-tabindex": "^0.7.1",
+    "jquery": ">=1.11",
+    "jquery-button-flyout": "^0.6.0",
+    "jquery-common-keydown": "0.1.1",
+    "jquery-migrate": "^1.4.1",
+    "jquery-next-id": "0.1.0",
+    "jquery-prevent-document-scroll-keys": "^0.4.0",
+    "jquery-roving-tabindex": "^0.8.0",
     "jsmin": "^1.0.1",
-    "pre-commit": "^1.1.2",
-    "rimraf": "^2.4.4"
+    "pre-commit": "^1.1.3",
+    "rimraf": "^2.5.2"
   },
   "peerDependencies": {
-    "jquery": ">=1.11 < 3",
-    "jquery-button-flyout": "^0.5.5",
-    "jquery-common-keydown": "0.0.4",
-    "jquery-next-id": "0.0.16",
-    "jquery-prevent-document-scroll-keys": "^0.3.1",
-    "jquery-roving-tabindex": "^0.7.1"
+    "jquery": ">=1.11",
+    "jquery-button-flyout": "^0.6.0",
+    "jquery-common-keydown": "0.1.1",
+    "jquery-next-id": "0.1.0",
+    "jquery-prevent-document-scroll-keys": "^0.4.0",
+    "jquery-roving-tabindex": "^0.8.0"
   }
 }
