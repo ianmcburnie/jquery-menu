@@ -1,7 +1,7 @@
 /**
 * @file jQuery plugin that creates the basic interactivity for an ARIA menu widget
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @version 0.2.0
+* @version 0.2.1
 * @requires jquery
 * @requires jquery-next-id
 * @requires jquery-button-flyout
@@ -54,7 +54,7 @@
             $this.buttonFlyout({focusManagement: true});
 
             // listen for specific key presses on all menu items
-            $this.commonKeyDown('[role^=menuitem]');
+            $rootMenu.commonKeyDown('[role^=menuitem]');
 
             // listen for roving tabindex update on all menu items
             $rootMenu.rovingTabindex($allmenuitems, {axis: 'y'});
@@ -70,19 +70,23 @@
             // all submenus start in collapsed state
             $subMenus.attr('aria-expanded', 'false');
 
-            $allmenuitems.not('a').on('click spaceKeyDown enterKeyDown', function(e) {
+            $rootMenu.on('click spaceKeyDown enterKeyDown', function(e) {
+                var $target = $(e.originalEvent.target);
+                var role = $target.attr('role');
+
+                switch (role) {
+                    case "menuitemradio":
+                        $radios.attr('aria-checked', 'false');
+                        $target.attr('aria-checked', 'true');
+                        break;
+                    case "menuitemcheckbox":
+                        $target.attr('aria-checked', $target.attr('aria-checked') === 'true' ? 'false' : 'true');
+                        break;
+                    default:
+                        break;
+                }
+
                 $this.trigger('menuSelect');
-            });
-
-            // toggle checkbox state
-            $checkboxes.on('click spaceKeyDown enterKeyDown', function(e) {
-                $(this).attr('aria-checked', $(this).attr('aria-checked') === 'true' ? 'false' : 'true');
-            });
-
-            // toggle radios state
-            $radios.on('click spaceKeyDown enterKeyDown', function(e) {
-                $radios.attr('aria-checked', 'false');
-                $(this).attr('aria-checked', 'true');
             });
 
             // reset all tabindexes when flyout opens and closes
