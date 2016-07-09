@@ -1,13 +1,13 @@
 /**
 * @file jQuery plugin that creates the basic interactivity for an ARIA menu widget
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @version 0.1.1
+* @version 0.2.0
 * @requires jquery
 * @requires jquery-next-id
 * @requires jquery-button-flyout
 * @requires jquery-common-keydown
 * @requires jquery-roving-tabindex
-* @requires jquery-prevent-document-scroll-keys
+* @requires jquery-prevent-scroll-keys
 */
 (function($, window, document, undefined) {
     function createKeyCodeMap() {
@@ -54,7 +54,7 @@
             $this.buttonFlyout({focusManagement: true});
 
             // listen for specific key presses on all menu items
-            $allmenuitems.commonKeyDown();
+            $this.commonKeyDown('[role^=menuitem]');
 
             // listen for roving tabindex update on all menu items
             $rootMenu.rovingTabindex($allmenuitems, {axis: 'y'});
@@ -106,7 +106,7 @@
             });
 
             // use a plugin to prevent page scroll when arrow keys are pressed
-            $('[role^=menuitem]').preventDocumentScrollKeys();
+            $this.preventScrollKeys('[role^=menuitem]');
 
             // mark widget as js initialised
             $this.addClass('menu--js');
