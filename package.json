@@ -5,10 +5,9 @@
   "scripts": {
     "start": "npm run build && onchange 'jquery.menu.js' -- npm run lasso",
     "prepublish": "npm run clean && npm run lint && npm run build",
-    "build": "npm run clean && npm run lasso && npm run minify",
+    "build": "npm run clean && npm run minify",
     "clean": "rimraf *.min.js lint.txt",
     "fix": "eslint jquery.menu.js --fix",
-    "lasso": "lasso browser.json --output-dir ./ --minify && rimraf build",
     "lint": "eslint jquery.menu.js > lint.txt",
     "minify": "jsmin -o jquery.menu.min.js jquery.menu.js"
   },
@@ -34,7 +33,7 @@
     "eslint": "^3.0.0",
     "eslint-config-google": "^0.6.0",
     "jquery": ">=1.11",
-    "jquery-button-flyout": "~0.7.0",
+    "jquery-button-flyout": "~0.7.1",
     "jquery-common-keydown": "~0.2.0",
     "jquery-migrate": "^1.4.1",
     "jquery-next-id": "~0.1.0",
@@ -48,7 +47,7 @@
   },
   "peerDependencies": {
     "jquery": ">=1.11",
-    "jquery-button-flyout": "~0.7.0",
+    "jquery-button-flyout": "~0.7.1",
     "jquery-common-keydown": "~0.2.0",
     "jquery-next-id": "~0.1.0",
     "jquery-prevent-scroll-keys": "~0.5.0",
