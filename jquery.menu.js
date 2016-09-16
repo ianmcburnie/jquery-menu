@@ -1,7 +1,7 @@
 /**
 * @file jQuery plugin that creates the basic interactivity for an ARIA menu widget
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @version 0.2.3
+* @version 0.2.4
 * @requires jquery
 * @requires jquery-next-id
 * @requires jquery-button-flyout
@@ -54,7 +54,7 @@
             $this.buttonFlyout({focusManagement: true});
 
             // listen for specific key presses on all menu items
-            $rootMenu.commonKeyDown('[role^=menuitem]');
+            $rootMenu.commonKeyDown();
 
             // listen for roving tabindex update on all menu items
             $rootMenu.rovingTabindex('[role^=menuitem]', {axis: 'y'});
