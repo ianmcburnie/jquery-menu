@@ -24,9 +24,12 @@
     * jQuery plugin that creates the basic interactivity for an ARIA menu widget
     *
     * @method "jQuery.fn.menu"
+    * @param {Object} [options]
     * @return {jQuery} chainable jQuery class
     */
-    $.fn.menu = function menu() {
+    $.fn.menu = function menu(options) {
+        options = options || {};
+
         return this.each(function onEach() {
             var $this = $(this);
             var $button = $this.find('button');
@@ -40,12 +43,15 @@
             var $firstMenuItem = $allmenuitems.first();
             var $subMenus = $rootMenu.find('[role=menuitem][aria-haspopup=true]');
             var keyCodeMap = createKeyCodeMap();
+            var isSupportShortcutKey = !options.disableShortcutKey;
             var shortcutKeyMap = {};
 
             // store first char of all menu items
-            $allmenuitems.each(function(idx) {
-                shortcutKeyMap[$(this).text()[0]] = idx;
-            });
+            if (isSupportShortcutKey) {
+                $allmenuitems.each(function(idx) {
+                    shortcutKeyMap[$(this).text()[0]] = idx;
+                });
+            }
 
             // assign id to widget
             $this.nextId('popupmenu');
@@ -95,14 +101,16 @@
             });
 
             // if char key is pressed, set focus on 1st matching menu item
-            $allmenuitems.on('keydown', function(e) {
-                var char = keyCodeMap[e.keyCode];
-                var itemIndex = shortcutKeyMap[char];
+            if (isSupportShortcutKey) {
+                $allmenuitems.on('keydown', function(e) {
+                    var char = keyCodeMap[e.keyCode];
+                    var itemIndex = shortcutKeyMap[char];
 
-                if (itemIndex) {
-                    $allmenuitems.get(itemIndex).focus();
-                }
-            });
+                    if (itemIndex) {
+                        $allmenuitems.get(itemIndex).focus();
+                    }
+                });
+            }
 
             // when a menu item selection has been made, set focus back to button
             $this.on('menuSelect', function onMenuSelect(e) {
