@@ -44,7 +44,10 @@
 
             // store first char of all menu items
             $allmenuitems.each(function(idx) {
-                shortcutKeyMap[$(this).text()[0]] = idx;
+                var firstChar = $(this).text()[0];
+                if (!shortcutKeyMap[firstChar]) {
+                    shortcutKeyMap[firstChar] = idx;
+                }
             });
 
             // assign id to widget
