@@ -25,7 +25,7 @@ jsdoc
 # JS for demo page
 browser.js
 
-# Lasso build directory
+# Lasso
 build
-
 .cache
+docs/browser.js.*

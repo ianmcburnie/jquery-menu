@@ -36,7 +36,7 @@ The input structure is then modified like so:
 </div>
 ```
 
-the menu can now be navigated with cursor keys or mouse.
+The menu can now be navigated with cursor keys or mouse.
 
 Grouped menu structures are also supported:
 
@@ -63,3 +63,5 @@ Grouped menu structures are also supported:
     </div>
 </div>
 ```
+
+A `menuSelect` event is triggered when activating a menuitem with click, space or enter.

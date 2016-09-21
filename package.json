@@ -3,13 +3,16 @@
   "description": "jQuery plugin that creates the basic interactivity for an ARIA menu widget.",
   "version": "0.2.4",
   "scripts": {
-    "start": "npm run build && onchange 'jquery.menu.js' -- npm run lasso",
+    "start": "npm run lasso && parallelshell 'npm run server' 'npm run watch'",
     "prepublish": "npm run clean && npm run lint && npm run build",
-    "build": "npm run clean && npm run minify",
-    "clean": "rimraf *.min.js lint.txt",
+    "build": "npm run clean && npm run minify && npm run lasso",
+    "clean": "rimraf .cache build docs/browser.js.* lint.txt",
     "fix": "eslint jquery.menu.js --fix",
+    "lasso": "lasso browser.json --output-dir docs --minify",
     "lint": "eslint jquery.menu.js > lint.txt",
-    "minify": "jsmin -o jquery.menu.min.js jquery.menu.js"
+    "minify": "jsmin -o jquery.menu.min.js jquery.menu.js",
+    "server": "browser-sync start -s --ss docs --index docs/index.html --files docs ",
+    "watch": "onchange jquery.menu.js -- npm run lasso"
   },
   "pre-commit": "prepublish",
   "author": "Ian McBurnie <ianmcburnie@hotmail.com>",
@@ -30,6 +33,7 @@
   },
   "license": "ISC",
   "devDependencies": {
+    "browser-sync": "^2",
     "eslint": "^3",
     "eslint-config-google": "~0.6",
     "jquery": ">=1.11",
@@ -42,6 +46,7 @@
     "jsmin": "^1",
     "lasso-cli": "^2",
     "onchange": "^3",
+    "parallelshell": "^2",
     "pre-commit": "^1",
     "rimraf": "^2"
   },
