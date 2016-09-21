@@ -22,9 +22,6 @@ lint.txt
 # JSDoc
 jsdoc
 
-# JS for demo page
-browser.js
-
 # Lasso
 build
 .cache
