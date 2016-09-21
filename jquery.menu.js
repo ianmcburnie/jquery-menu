@@ -49,7 +49,10 @@
             // store first char of all menu items
             if (isSupportShortcutKey) {
                 $allmenuitems.each(function(idx) {
-                    shortcutKeyMap[$(this).text()[0]] = idx;
+                    var firstChar = $(this).text()[0];
+                    if (!shortcutKeyMap[firstChar]) {
+                        shortcutKeyMap[firstChar] = idx;
+                    }
                 });
             }
 
