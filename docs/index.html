@@ -14,6 +14,7 @@
                 cursor: pointer;
                 display: none;
                 font-size: small;
+                left: 0;
                 list-style-type: none;
                 margin: 0;
                 padding: 0;
@@ -104,12 +105,16 @@
 
                 $menu.menu();
 
-                $menu.on('menuSelect', function(e) {
+                $menu.on('menuSelect', '[role^=menuitem]', function(e) {
                     console.log(this, e);
                 });
 
+                $menu.on('click spaceKeyDown enterKeyDown', '[role^=menuitem]', function(e) {
+                    //console.log(this, e);
+                });
+
                 $menu.on('click', '[role^=menuitem]', function(e) {
-                    console.log(this, e);
+                    //console.log(this, e);
                 });
             });
         </script>

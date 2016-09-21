@@ -64,4 +64,12 @@ Grouped menu structures are also supported:
 </div>
 ```
 
-A `menuSelect` event is triggered when activating a menuitem with click, space or enter.
+A `menuSelect` event is triggered when activating any menuitem with click, space or enter. The event can be delegated to the menu, and bound to the menuitem, like so:
+
+```js
+$menu.on('menuSelect', '[role^=menuitem]', function(e) {
+    // this = menuitem element
+});
+```
+
+Radio buttons and checkboxes will be automatically toggled.

@@ -1,7 +1,7 @@
 /**
 * @file jQuery plugin that creates the basic interactivity for an ARIA menu widget
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @version 0.2.5
+* @version 0.3.0
 * @requires jquery
 * @requires jquery-next-id
 * @requires jquery-button-flyout
@@ -79,8 +79,12 @@
             // all submenus start in collapsed state
             $subMenus.attr('aria-expanded', 'false');
 
-            $rootMenu.on('click spaceKeyDown enterKeyDown', function(e) {
-                var $menuitem = $(e.originalEvent.target);
+            $rootMenu.on('click spaceKeyDown enterKeyDown', '[role^=menuitem]', function(e) {
+                if (e.type === 'enterKeyDown') {
+                    e.preventDefault();
+                }
+
+                var $menuitem = $(this);
                 var role = $menuitem.attr('role');
 
                 switch (role) {
@@ -95,7 +99,7 @@
                         break;
                 }
 
-                $widget.trigger('menuSelect');
+                $menuitem.trigger('menuSelect');
             });
 
             // reset all tabindexes when flyout opens and closes
