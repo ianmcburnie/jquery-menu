@@ -4,6 +4,21 @@
         <title>Demo: jquery-menu</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <style>
+            body {
+                margin: 0;
+            }
+            #eyebrow {
+                background-color: #333;
+                color: #eee;
+                padding: 10px;
+            }
+            .readme {
+                background-color: #eee;
+                padding: 10px;
+            }
+            .examples {
+                padding: 10px;
+            }
             .menu {
                 position: relative;
             }
@@ -64,38 +79,43 @@
     </head>
     <body>
         <div role="main">
-            <h1>Demo: jquery-menu</h1>
-            <p>jQuery plugin that creates the basic interactivity for an ARIA menu widget.</p>
-            <p>Don't pay too much attention to the style here, it's only for demonstration purposes ;-)</p>
-
-            <span class="menu">
-                <button>Flat Menu</button>
-                <div role="menu">
-                    <div role="menuitem">Grid</div>
-                    <div role="menuitem">List</div>
-                </div>
-            </span>
-
-            <span class="menu">
-                <button>Grouped Menu</button>
-                <div role="menu">
-                    <div role="presentation">
+            <div id="eyebrow">
+                <h1>Demo: jquery-menu</h1>
+            </div>
+            <div class="readme">
+                <p>jQuery plugin that creates the basic interactivity for an ARIA menu widget.</p>
+                <p>Don't pay too much attention to the style here, it's only for demonstration purposes ;-)</p>
+            </div>
+            <div class="examples">
+                <span class="menu">
+                    <button>Flat Menu</button>
+                    <div role="menu">
                         <div role="menuitem">Grid</div>
-                        <div role="menuitem">List </div>
+                        <div role="menuitem">List</div>
                     </div>
-                    <hr />
-                    <div role="presentation">
-                        <div role="menuitemradio" aria-checked="true">Name</div>
-                        <div role="menuitemradio" aria-checked="false">Date</div>
-                        <div role="menuitemradio" aria-checked="false">Price</div>
-                    </div>
-                    <hr />
-                    <div role="presentation">
-                        <div role="menuitemcheckbox" aria-checked="true">Buy it Now</div>
-                        <div role="menuitemcheckbox" aria-checked="true">Auction</div>
+                </span>
+
+                <span class="menu">
+                    <button>Grouped Menu</button>
+                    <div role="menu">
+                        <div role="presentation">
+                            <div role="menuitem">Grid</div>
+                            <div role="menuitem">List </div>
+                        </div>
+                        <hr />
+                        <div role="presentation">
+                            <div role="menuitemradio" aria-checked="true">Name</div>
+                            <div role="menuitemradio" aria-checked="false">Date</div>
+                            <div role="menuitemradio" aria-checked="false">Price</div>
+                        </div>
+                        <hr />
+                        <div role="presentation">
+                            <div role="menuitemcheckbox" aria-checked="true">Buy it Now</div>
+                            <div role="menuitemcheckbox" aria-checked="true">Auction</div>
+                        </div>
                     </div>
                 </div>
-            </span>
+            </div>
         </div>
 
         <script src="browser.js"></script>

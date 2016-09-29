@@ -1,7 +1,7 @@
 /**
 * @file jQuery plugin that creates the basic interactivity for an ARIA menu widget
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @version 0.3.0
+* @version 0.4.0
 * @requires jquery
 * @requires jquery-next-id
 * @requires jquery-button-flyout
@@ -66,7 +66,7 @@
             $rootMenu.commonKeyDown();
 
             // listen for roving tabindex update on all menu items
-            $rootMenu.rovingTabindex('[role^=menuitem]', {axis: 'y'});
+            $rootMenu.rovingTabindex('[role^=menuitem]', {axis: 'y', autoReset: true});
 
             // assign id to menu
             $rootMenu.prop('id', $widget.prop('id') + '-menu');
