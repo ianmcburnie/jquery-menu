@@ -7,7 +7,7 @@ The following structure is expected:
 ```html
 <!-- simple flat menu -->
 <div class="menu">
-    <button>Open Menu</button>
+    <button type="button">Open Menu</button>
     <div role="menu">
         <div role="menuitem">Grid</div>
         <div role="menuitem">List</div>
@@ -28,7 +28,7 @@ The input structure is then modified like so:
 ```html
 <!-- simple flat menu -->
 <div class="menu" id="menu_0">
-    <button aria-controls="menu_0_flyout" aria-expanded="false" aria-haspopup="true">Open Menu</button>
+    <button  type="button" aria-controls="menu_0_flyout" aria-expanded="false" aria-haspopup="true">Open Menu</button>
     <div role="menu" id="menu_0_flyout">
         <div role="menuitem">Grid</div>
         <div role="menuitem">List</div>
@@ -68,6 +68,14 @@ A `menuSelect` event is triggered when activating any menuitem with click, space
 
 ```js
 $menu.on('menuSelect', '[role^=menuitem]', function(e) {
+    // this = menuitem element
+});
+```
+
+Which achieves the same as:
+
+```js
+$menu.on('click spaceKeyDown enterKeyDown', '[role^=menuitem]', function(e) {
     // this = menuitem element
 });
 ```

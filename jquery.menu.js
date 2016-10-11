@@ -1,7 +1,7 @@
 /**
 * @file jQuery plugin that creates the basic interactivity for an ARIA menu widget
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @version 0.4.0
+* @version 0.5.0
 * @requires jquery
 * @requires jquery-next-id
 * @requires jquery-button-flyout
@@ -25,26 +25,42 @@
     *
     * @method "jQuery.fn.menu"
     * @param {Object} [options]
+    * @param {boolean} [options.buttonSelector] - css selector for button element (default: 'button')
+    * @param {boolean} [options.overlaySelector] - css selector for overlay element (default: '[role=menu]')
+    * @param {boolean} [options.debug] - print debug statements to console (default: false)
     * @return {jQuery} chainable jQuery class
     */
     $.fn.menu = function menu(options) {
-        options = options || {};
+        options = $.extend({
+            buttonSelector: 'button',
+            debug: false,
+            disableShortcutKey: false,
+            overlaySelector: '[role=menu]'
+        }, options);
 
         return this.each(function onEach() {
+            var buttonSelector = options.buttonSelector;
+            var overlaySelector = options.overlaySelector;
             var $widget = $(this);
-            var $button = $widget.find('button');
-            var $rootMenu = $widget.find('> [role=menu], > *:last-child > [role=menu]').first();
-            var $groups = $rootMenu.find('> div[role=presentation]');
-            var $allMenuItems = $rootMenu.find('> [role^=menuitem], > div > [role^=menuitem], > a');
-            var $links = $rootMenu.find('a');
+            var $button = $widget.find(buttonSelector);
+            var $rootMenu = $widget.find(overlaySelector);
+            var $allMenuItems = $rootMenu.find('[role^=menuitem]');
             var $buttons = $rootMenu.find('[role=menuitem]');
             var $checkboxes = $rootMenu.find('[role=menuitemcheckbox]');
             var $radios = $rootMenu.find('[role=menuitemradio]');
             var $firstMenuItem = $allMenuItems.first();
-            var $subMenus = $rootMenu.find('[role=menuitem][aria-haspopup=true]');
             var keyCodeMap = createKeyCodeMap();
             var isSupportShortcutKey = !options.disableShortcutKey;
             var shortcutKeyMap = {};
+
+            var collapseMenu = function() {
+                setTimeout(function(e) {
+                    $button.attr('aria-expanded', 'false');
+                    $button.focus();
+                }, 50);
+            };
+
+            var onEscapeKeyDown = collapseMenu;
 
             // store first char of all menu items
             if (isSupportShortcutKey) {
@@ -57,16 +73,18 @@
             }
 
             // assign id to widget
-            $widget.nextId('popupmenu');
+            $widget.nextId('menu');
 
             // menu is built on top of button-flyout plugin
-            $widget.buttonFlyout({focusManagement: true});
-
-            // listen for specific key presses on all menu items
-            $rootMenu.commonKeyDown();
+            $widget.buttonFlyout({
+                debug: options.debug,
+                buttonSelector: buttonSelector,
+                focusManagement: 'first',
+                overlaySelector: overlaySelector
+            });
 
             // listen for roving tabindex update on all menu items
-            $rootMenu.rovingTabindex('[role^=menuitem]', {axis: 'y', autoReset: true});
+            $rootMenu.rovingTabindex('[role^=menuitem]', {axis: 'y', autoReset: true, debug: options.debug});
 
             // assign id to menu
             $rootMenu.prop('id', $widget.prop('id') + '-menu');
@@ -76,16 +94,12 @@
                 .attr('aria-haspopup', 'true')
                 .prop('id', $widget.prop('id') + '-button');
 
-            // all submenus start in collapsed state
-            $subMenus.attr('aria-expanded', 'false');
-
-            $rootMenu.on('click spaceKeyDown enterKeyDown', '[role^=menuitem]', function(e) {
-                if (e.type === 'enterKeyDown') {
-                    e.preventDefault();
-                }
-
+            // listen for clicks, scoped to menuitem, bound to menu
+            $widget.on('click enterKeyDown spaceKeyDown', '[role^=menuitem]', function(e) {
                 var $menuitem = $(this);
                 var role = $menuitem.attr('role');
+
+                e.stopPropagation();
 
                 switch (role) {
                     case "menuitemradio":
@@ -99,30 +113,26 @@
                         break;
                 }
 
-                $menuitem.trigger('menuSelect');
+                setTimeout(function(e) {
+                    $menuitem.trigger('menuSelect');
+                    collapseMenu();
+                }, 100);
             });
 
-            // reset all tabindexes when flyout opens and closes
-            $widget.on('buttonFlyoutOpen buttonFlyoutClose', function onShowOrHide() {
-                $allMenuItems.attr('tabindex', '-1');
-            });
+            $widget.on('escapeKeyDown', '[role^=menuitem]', onEscapeKeyDown);
 
             // if char key is pressed, set focus on 1st matching menu item
             if (isSupportShortcutKey) {
-                $allMenuItems.on('keydown', function(e) {
+                $allMenuItems.attr('tabindex', '-1');
+                $widget.on('keydown', '[role^=menuitem]', function(e) {
                     var char = keyCodeMap[e.keyCode];
                     var itemIndex = shortcutKeyMap[char];
 
-                    if (itemIndex) {
+                    if (itemIndex !== undefined) {
                         $allMenuItems.get(itemIndex).focus();
                     }
                 });
             }
-
-            // when a menu item selection has been made, set focus back to button
-            $widget.on('menuSelect', function onMenuSelect(e) {
-                $button.focus();
-            });
 
             // use a plugin to prevent page scroll when arrow keys are pressed
             $widget.preventScrollKeys('[role^=menuitem]');

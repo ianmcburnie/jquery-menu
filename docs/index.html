@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <title>Demo: jquery-menu</title>
+        <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <style>
             body {
@@ -88,7 +89,7 @@
             </div>
             <div class="examples">
                 <span class="menu">
-                    <button>Flat Menu</button>
+                    <button type="button">Flat Menu</button>
                     <div role="menu">
                         <div role="menuitem">Grid</div>
                         <div role="menuitem">List</div>
@@ -96,7 +97,7 @@
                 </span>
 
                 <span class="menu">
-                    <button>Grouped Menu</button>
+                    <button type="button">Grouped Menu</button>
                     <div role="menu">
                         <div role="presentation">
                             <div role="menuitem">Grid</div>
@@ -123,18 +124,14 @@
             $(function() {
                 var $menu = $('.menu');
 
-                $menu.menu();
-
-                $menu.on('menuSelect', '[role^=menuitem]', function(e) {
-                    console.log(this, e);
-                });
+                $menu.menu({debug: true});
 
                 $menu.on('click spaceKeyDown enterKeyDown', '[role^=menuitem]', function(e) {
-                    //console.log(this, e);
+                    console.log(e, this);
                 });
 
-                $menu.on('click', '[role^=menuitem]', function(e) {
-                    //console.log(this, e);
+                $menu.on('menuSelect', '[role^=menuitem]', function(e) {
+                    console.log(e, this);
                 });
             });
         </script>
