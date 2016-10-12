@@ -2,7 +2,7 @@
     "dependencies":[
         {"require-run": "jquery"},
         "jquery-next-id",
-        "jquery-button-flyout",
+        "jquery-click-flyout",
         "jquery-common-keydown",
         "jquery-roving-tabindex",
         "jquery-prevent-scroll-keys",

@@ -1,10 +1,10 @@
 /**
 * @file jQuery plugin that creates the basic interactivity for an ARIA menu widget
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @version 0.5.0
+* @version 0.6.0
 * @requires jquery
 * @requires jquery-next-id
-* @requires jquery-button-flyout
+* @requires jquery-click-flyout
 * @requires jquery-common-keydown
 * @requires jquery-roving-tabindex
 * @requires jquery-prevent-scroll-keys
@@ -76,9 +76,9 @@
             $widget.nextId('menu');
 
             // menu is built on top of button-flyout plugin
-            $widget.buttonFlyout({
+            $widget.clickFlyout({
                 debug: options.debug,
-                buttonSelector: buttonSelector,
+                triggerSelector: buttonSelector,
                 focusManagement: 'first',
                 overlaySelector: overlaySelector
             });
