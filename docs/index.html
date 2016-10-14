@@ -84,7 +84,7 @@
                 <h1>Demo: jquery-menu</h1>
             </div>
             <div class="readme">
-                <p>jQuery plugin that creates the basic interactivity for an ARIA menu widget.</p>
+                <p>jQuery plugin that creates the basic interactivity for an ARIA menu widget. Keyboard focus autowrap is set to false by default.</p>
                 <p>Don't pay too much attention to the style here, it's only for demonstration purposes ;-)</p>
             </div>
             <div class="examples">
@@ -124,7 +124,7 @@
             $(function() {
                 var $menu = $('.menu');
 
-                $menu.menu({debug: true});
+                $menu.menu({autoWrap: false, debug: true});
 
                 $menu.on('click spaceKeyDown enterKeyDown', '[role^=menuitem]', function(e) {
                     console.log(e, this);

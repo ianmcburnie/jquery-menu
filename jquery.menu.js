@@ -1,7 +1,7 @@
 /**
 * @file jQuery plugin that creates the basic interactivity for an ARIA menu widget
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @version 0.7.0
+* @version 0.7.1
 * @requires jquery
 * @requires jquery-next-id
 * @requires jquery-click-flyout
@@ -24,6 +24,7 @@
     *
     * @method "jQuery.fn.menu"
     * @param {Object} [options]
+    * @param {boolean} [options.autoWrap] - boolean indicating whether keyboard focus should wrap (default: false)
     * @param {boolean} [options.buttonSelector] - css selector for button element (default: 'button')
     * @param {boolean} [options.overlaySelector] - css selector for overlay element (default: '[role=menu]')
     * @param {boolean} [options.debug] - print debug statements to console (default: false)
@@ -31,6 +32,7 @@
     */
     $.fn.menu = function menu(options) {
         options = $.extend({
+            autoWrap: false,
             buttonSelector: 'button',
             debug: false,
             disableShortcutKey: false,
@@ -76,6 +78,7 @@
 
             // menu is built on top of button-flyout plugin
             $widget.clickFlyout({
+                autoCollapse: true,
                 debug: options.debug,
                 triggerSelector: buttonSelector,
                 focusManagement: 'first',
@@ -83,7 +86,7 @@
             });
 
             // listen for roving tabindex update on all menu items
-            $rootMenu.rovingTabindex('[role^=menuitem]', {axis: 'y', autoReset: true, debug: options.debug});
+            $rootMenu.rovingTabindex('[role^=menuitem]', {axis: 'y', autoReset: true, autoWrap: options.autoWrap, debug: options.debug});
 
             // assign id to menu
             $rootMenu.prop('id', $widget.prop('id') + '-menu');
