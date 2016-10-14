@@ -1,13 +1,12 @@
 /**
 * @file jQuery plugin that creates the basic interactivity for an ARIA menu widget
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @version 0.6.0
+* @version 0.7.0
 * @requires jquery
 * @requires jquery-next-id
 * @requires jquery-click-flyout
 * @requires jquery-common-keydown
 * @requires jquery-roving-tabindex
-* @requires jquery-prevent-scroll-keys
 */
 (function($, window, document, undefined) {
     function createKeyCodeMap() {
@@ -133,9 +132,6 @@
                     }
                 });
             }
-
-            // use a plugin to prevent page scroll when arrow keys are pressed
-            $widget.preventScrollKeys('[role^=menuitem]');
 
             // mark widget as js initialised
             $widget.addClass('menu--js');

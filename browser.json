@@ -5,7 +5,6 @@
         "jquery-click-flyout",
         "jquery-common-keydown",
         "jquery-roving-tabindex",
-        "jquery-prevent-scroll-keys",
         "jquery.menu.js"
     ]
 }
