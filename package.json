@@ -1,7 +1,7 @@
 {
   "name": "jquery-menu",
   "description": "jQuery plugin that creates the basic interactivity for an ARIA menu widget.",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "scripts": {
     "start": "npm run lasso && parallelshell 'npm run server' 'npm run watch'",
     "prepublish": "npm run clean && npm run lint && npm run build",
