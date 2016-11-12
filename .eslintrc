@@ -5,13 +5,15 @@
         "jquery": true
     },
     "rules": {
+        comma-dangle: ["error", "only-multiline"],
         "indent": [2, 4, { "SwitchCase": 1 }],
-        "wrap-iife": [2, "any"],
+        "max-len": 0,
         "no-unused-vars": 0,
         "no-shadow-restricted-names": 0,
-        "max-len": 0,
+        "no-var": 0,
+        "new-cap": 0,
         "require-jsdoc": 0,
         "valid-jsdoc": 0,
-        "new-cap": 0
+        "wrap-iife": [2, "any"]
     }
 }

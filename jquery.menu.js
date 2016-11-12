@@ -1,7 +1,7 @@
 /**
 * @file jQuery plugin that creates the basic interactivity for an ARIA menu widget
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @version 0.7.1
+* @version 0.7.2
 * @requires jquery
 * @requires jquery-next-id
 * @requires jquery-click-flyout
@@ -104,11 +104,11 @@
                 e.stopPropagation();
 
                 switch (role) {
-                    case "menuitemradio":
+                    case 'menuitemradio':
                         $radios.attr('aria-checked', 'false');
                         $menuitem.attr('aria-checked', 'true');
                         break;
-                    case "menuitemcheckbox":
+                    case 'menuitemcheckbox':
                         $menuitem.attr('aria-checked', $menuitem.attr('aria-checked') === 'true' ? 'false' : 'true');
                         break;
                     default:
