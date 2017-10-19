@@ -1,7 +1,7 @@
 /**
 * @file jQuery plugin that creates the basic interactivity for an ARIA menu widget
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @version 0.7.2
+* @version 0.7.3
 * @requires jquery
 * @requires jquery-next-id
 * @requires jquery-click-flyout
@@ -55,7 +55,7 @@
             var shortcutKeyMap = {};
 
             var collapseMenu = function() {
-                setTimeout(function(e) {
+                setTimeout(function() {
                     $button.attr('aria-expanded', 'false');
                     $button.focus();
                 }, 50);
@@ -86,7 +86,12 @@
             });
 
             // listen for roving tabindex update on all menu items
-            $rootMenu.rovingTabindex('[role^=menuitem]', {axis: 'y', autoReset: true, autoWrap: options.autoWrap, debug: options.debug});
+            $rootMenu.rovingTabindex('[role^=menuitem]', {
+                axis: 'y',
+                autoReset: true,
+                autoWrap: options.autoWrap,
+                debug: options.debug
+            });
 
             // assign id to menu
             $rootMenu.prop('id', $widget.prop('id') + '-menu');
@@ -115,7 +120,7 @@
                         break;
                 }
 
-                setTimeout(function(e) {
+                setTimeout(function() {
                     $menuitem.trigger('menuSelect');
                     collapseMenu();
                 }, 100);
